@@ -4,6 +4,10 @@
 ##############
 stage_dir: "{{ lookup('env', 'PWD') }}/stage_dir"
 
+#####
+#  
+apache_proxy_image: geneontology/apache-proxy:v1
+########
 ###############
 # staged_repos are cloned and deployed under stage_dir
 ##############
