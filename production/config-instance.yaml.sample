@@ -1,0 +1,9 @@
+ssh_keys:
+     public: /Users/REPLACE/SSH/go-ssh.pub
+     private: /Users/REPLACE_ME/SSH/go-ssh
+
+instance:
+    tags:
+       Name: amigo_noctua_stack
+    instance_type: t2.large
+    disk_size: 100 
