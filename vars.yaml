@@ -4,9 +4,6 @@
 ##############
 stage_dir: "{{ lookup('env', 'PWD') }}/stage_dir"
 
-#####
-#  
-apache_proxy_image: geneontology/apache-proxy:v1
 ########
 ###############
 # staged_repos are cloned and deployed under stage_dir
@@ -22,6 +19,10 @@ staged_repos:
 ##############
 minerva_java_opts: "-Xmx4G"
 
+######
+# Golr Index
+PROD_MODE: 0 
+#####
 ###############
 # Barista Local Authentication.
 ##############
@@ -53,4 +54,12 @@ golr_host: "{{ host }}"
 golr_lookup_port: 8983  
 golr_lookup_url: http://{{ golr_host }}:{{ golr_lookup_port }}/solr
 golr_neo_lookup_url: http://{{ golr_host }}:{{ golr_lookup_port }}/solr
-golr_labels_url: http://{{ host }}:{{ golr_lookup_port }}
+golr_labels_url: http://{{ golr_host }}:{{ golr_lookup_port }}
+
+
+GOLR_INPUT_ONTOLOGIES: "http://skyhook.berkeleybop.org/release/ontology/extensions/go-gaf.owl 
+                        http://purl.obolibrary.org/obo/ncbitaxon/subsets/taxslim.owl
+                        http://skyhook.berkeleybop.org/release/ontology/extensions/gorel.owl"
+
+GOLR_INPUT_GAFS: "http://current.geneontology.org/annotations/aspgd.gaf.gz
+                 http://skyhook.berkeleybop.org/release/annotations/cgd.gaf.gz"

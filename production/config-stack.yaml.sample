@@ -1,13 +1,14 @@
 ssh_keys:
-     public: /Users/REPLACE_ME/SSH/go-ssh.pub
-     private: /Users/REPLACE_ME/SSH/go-ssh
+     public: /Users/SOME_USER/SSH/go-ssh.pub
+     private: /Users/SOME_USER/SSH/go-ssh
 stack:
    vars:
      stage_dir: /home/ubuntu/stage_dir
-     host: REPLACE_ME_WITH_AWS_INSTANCE_ELASTIC_IP 
-     uri: 'http://orcid.org/XXXX-XXXX-XXXX-XXXX'
-     username: 'REPLACE_ME'
-     password: 'REPLACE_ME'
-     minerva_java_opts: '-Xmx4G'
-     docker_hub_user: "aessiari"
-   scripts: [ stage.yaml, start_services.yaml  ]
+     host: REPLACE_ME 
+     golr_host: REPLACE_ME 
+     PROD_MODE: 1 
+     docker_hub_user: geneontology
+     tag: v2 
+     S3_CRED_FILE: /Users/AEssiari/S3/s3cfg
+     S3_BUCKET: REPLACE_ME
+   scripts: [ stage.yaml, start_production_services.yaml ]

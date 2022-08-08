@@ -1,0 +1,91 @@
+version: '3.7'
+services:
+
+  minerva:
+    hostname: minerva 
+    container_name: minerva 
+    environment:
+      JAVA_OPTS: "{{ minerva_java_opts }}"
+      GOLR_SEED: "{{ golr_lookup_url }}"
+      GOLR_LABELS: "{{ golr_labels_url }}"
+    volumes:
+      - {{ stage_dir }}:/var/minerva
+    image: '{{ docker_hub_user }}/minerva:{{ tag }}'
+    init: true
+    restart: unless-stopped
+
+  barista:
+    hostname: barista 
+    container_name: barista  
+    volumes:
+      - {{ stage_dir }}:/stage_dir
+      - {{ stage_dir }}/conf/startup.yaml:/app/startup.yaml
+    image: '{{ docker_hub_user }}/noctua:{{ tag }}'
+    command: ./node_modules/.bin/gulp run-barista
+    init: true
+    restart: unless-stopped
+    healthcheck:
+       test: wget --no-verbose --timeout=5 --tries=5 --spider http://barista:3400 || kill 1
+       interval: 60s
+       retries: 1
+       start_period: 30s
+    depends_on:
+      - minerva 
+
+  noctua:
+    hostname: noctua 
+    container_name: noctua  
+    volumes:
+      - {{ stage_dir }}:/stage_dir
+      - {{ stage_dir }}/conf/startup.yaml:/app/startup.yaml
+    image: '{{ docker_hub_user }}/noctua:{{ tag }}'
+    command: ./node_modules/.bin/gulp run-noctua
+    init: true
+    restart: unless-stopped
+    healthcheck:
+       test: wget --no-verbose --timeout=5 --tries=5 --spider http://noctua:8910 || kill 1
+       interval: 60s
+       retries: 1
+       start_period: 30s
+    depends_on:
+      - minerva 
+      - barista 
+
+  apache_barista:
+    hostname: apache_barista 
+    container_name: apache_barista
+    image: {{ apache_proxy_image }}
+    volumes:
+      - {{ stage_dir }}/httpd-confs/httpd-vhosts-barista.conf:/etc/apache2/sites-enabled/httpd-vhosts-barista.conf
+      - {{ stage_dir }}/apache_barista_logs:/var/log/apache2
+      - {{ stage_dir }}/s3cfg:/opt/credentials/s3cfg
+    ports:
+      - "{{ barista_proxy_port }}:80"
+    environment:
+      - USE_S3=1
+      - S3_PATH={{ S3_PATH }}/barista
+      - S3_BUCKET={{ S3_BUCKET }}
+    init: true
+    restart: unless-stopped
+    depends_on:
+      - barista 
+
+  apache_noctua:
+    hostname: apache_noctua
+    container_name: apache_noctua
+    image: {{ apache_proxy_image }}
+    volumes:
+      - {{ stage_dir }}/httpd-confs/httpd-vhosts-noctua.conf:/etc/apache2/sites-enabled/httpd-vhosts-noctua.conf
+      - {{ stage_dir }}/apache_noctua_logs:/var/log/apache2
+      - {{ stage_dir }}/s3cfg:/opt/credentials/s3cfg
+    ports:
+      - "{{ noctua_proxy_port }}:80"
+    environment:
+      - USE_S3=1
+      - S3_PATH={{ S3_PATH }}/noctua
+      - S3_BUCKET={{ S3_BUCKET }}
+    init: true
+    restart: unless-stopped
+    depends_on:
+      - noctua 
+
