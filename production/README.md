@@ -30,7 +30,7 @@ cp ./production/backend.tf.sample aws/backend.tf
 # Deploy
 Use Python script to deploy. Note the script has a -dry-run option.
 
->pip install go-deploy==0.2.0
+>pip install go-deploy==0.3.0 # requires python >=3.8.5
 >go-deploy -h
 
 # We append the date to the terraform workspace name. As as example we will use production-yy-mm-dd

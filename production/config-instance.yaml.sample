@@ -4,6 +4,9 @@ ssh_keys:
 
 instance:
     tags:
-       Name: amigo_noctua_stack
+       Name: noctua_stack
     instance_type: t2.large
+    open_ports:
+       - 80
+       - 22
     disk_size: 100 

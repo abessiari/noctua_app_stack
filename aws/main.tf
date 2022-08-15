@@ -39,6 +39,11 @@ variable "golr_port" {
   description = "golr server port"
 }
 
+variable "open_ports" {
+  type = list 
+  default = [var.ssh_port, var.noctua_port, var.barista_port, var.golr_port]
+}
+
 provider "aws" {
   region = "us-east-1"
   shared_credentials_files = [ "~/.aws/credentials" ]
@@ -50,7 +55,7 @@ module "base" {
   instance_type = var.instance_type
   public_key_path = var.public_key_path
   tags = var.tags
-  open_ports = [var.ssh_port, var.noctua_port, var.barista_port, var.golr_port]
+  open_ports = var.open_ports
   disk_size = var.disk_size
 }
 

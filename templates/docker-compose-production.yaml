@@ -51,32 +51,14 @@ services:
       - minerva 
       - barista 
 
-  apache_barista:
-    hostname: apache_barista 
-    container_name: apache_barista
-    image: {{ apache_proxy_image }}
-    volumes:
-      - {{ stage_dir }}/httpd-confs/httpd-vhosts-barista.conf:/etc/apache2/sites-enabled/httpd-vhosts-barista.conf
-      - {{ stage_dir }}/apache_barista_logs:/var/log/apache2
-      - {{ stage_dir }}/s3cfg:/opt/credentials/s3cfg
-    ports:
-      - "{{ barista_proxy_port }}:80"
-    environment:
-      - USE_S3=1
-      - S3_PATH={{ S3_PATH }}/barista
-      - S3_BUCKET={{ S3_BUCKET }}
-    init: true
-    restart: unless-stopped
-    depends_on:
-      - barista 
-
-  apache_noctua:
+  apache_proxy:
     hostname: apache_noctua
     container_name: apache_noctua
     image: {{ apache_proxy_image }}
     volumes:
-      - {{ stage_dir }}/httpd-confs/httpd-vhosts-noctua.conf:/etc/apache2/sites-enabled/httpd-vhosts-noctua.conf
-      - {{ stage_dir }}/apache_noctua_logs:/var/log/apache2
+      - {{ stage_dir }}/httpd-confs/httpd-vhosts-prod-noctua.conf:/etc/apache2/sites-enabled/httpd-vhosts-noctua.conf
+      - {{ stage_dir }}/httpd-confs/httpd-vhosts-prod-barista.conf:/etc/apache2/sites-enabled/httpd-vhosts-barista.conf
+      - {{ stage_dir }}/apache_logs:/var/log/apache2
       - {{ stage_dir }}/s3cfg:/opt/credentials/s3cfg
     ports:
       - "{{ noctua_proxy_port }}:80"
@@ -88,4 +70,5 @@ services:
     restart: unless-stopped
     depends_on:
       - noctua 
+      - barista 
 
