@@ -1,7 +1,7 @@
 # Noctua Application Deployment
 
-This repository enables the deployment of the noctua editor (which includes 
-minerva, barista, golr and noctua) locally, using self-generated GO-CAM models (in the form of .ttl files).    
+This repository enables the deployment of the noctua stack to AWS. It includes 
+minerva, barista, and noctua and it points to an external minerva instance.     
 
 ## Deploy a version of the Noctua editor (including minerva, barista, noctua):
   - Important ansible files:
@@ -11,7 +11,7 @@ minerva, barista, golr and noctua) locally, using self-generated GO-CAM models (
     - stage.yaml
     - start_services.yaml
   
-## Deployment artifacts generated:
+## Artifacts Deployed To Staging directory:
   - Copy blazegraph.jnl
   - Cloned repositories:
     - noctua-form, noctua-landing-page, noctua-models, go-site and noctua-visual-pathway-editor.
