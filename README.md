@@ -1,4 +1,4 @@
-# Noctua Application Deployment
+# Noctua Testing Deployment
 
 This repository enables the deployment of the noctua editor (which includes 
 minerva, barista, golr and noctua) locally, using self-generated GO-CAM models (in the form of .ttl files).  
