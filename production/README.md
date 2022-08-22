@@ -34,6 +34,15 @@ We use S3 terraform backend to store terraform's state. See production/backend.t
 ## Github OAUTH
 Noctua uses OAUTH for authentication. See templates/github.yaml 
 
+## Prepare Blazegraph journal
+
+## DNS 
+
+Use DNS records for noctua and barista. Once the stack is ready you would need to point these to elastic ip address of the stack,  
+
+## Golr/Amigo
+Use the dns name of the golr instance running aside amigo
+
 ## Provision to AWS
 
 Copy sample files and modify as needed. For the terraform worksapce we append the date.
