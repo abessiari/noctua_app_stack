@@ -19,19 +19,22 @@ minerva, barista, and noctua and it points to an external amigo instance.
   - github OAUTH client id and secret
   - docker-production-compose and various configuration files from template directory
 
-## Install Python Deploy Script
-Use Python script to deploy. Note the script has a <b>-dry-run</b> option.
+## Install Python deployment Script
+Note the script has a <b>-dry-run</b> option.
 
 ```
 >pip install go-deploy==0.3.0 # requires python >=3.8.5
 >go-deploy -h
 ```
 
-## S3 TERRAFORM BACKEND 
+## S3 Terraform Backend
 
 We use S3 terraform backend to store terraform's state. See production/backend.tf.sample
 
-## PROVISON TO AWS
+## Github OAUTH
+Noctua uses OAUTH for authentication. See templates/github.yaml 
+
+## Provision to AWS
 
 Copy sample files and modify as needed. For the terraform worksapce we append the date.
 As an example we use production-yy-mm-dd
