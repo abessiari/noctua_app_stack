@@ -58,6 +58,7 @@ services:
     volumes:
       - {{ stage_dir }}/httpd-confs/httpd-vhosts-prod-noctua.conf:/etc/apache2/sites-enabled/httpd-vhosts-noctua.conf
       - {{ stage_dir }}/httpd-confs/httpd-vhosts-prod-barista.conf:/etc/apache2/sites-enabled/httpd-vhosts-barista.conf
+      - {{ stage_dir }}/httpd-confs/robots.txt:/var/www/html/robots.txt
       - {{ stage_dir }}/apache_logs:/var/log/apache2
       - {{ stage_dir }}/s3cfg:/opt/credentials/s3cfg
     ports:

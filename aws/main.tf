@@ -15,33 +15,9 @@ variable "public_key_path" {
   default = "~/.ssh/id_rsa.pub"
 }
 
-variable "ssh_port" {
-  type        = number
-  default     = 22
-  description = "ssh server port"
-}
-
-variable "noctua_port" {
-  type        = number
-  default     = 8080
-  description = "noctua server port"
-}
-
-variable "barista_port" {
-  type        = number
-  default     = 8090
-  description = "barista server port"
-}
-
-variable "golr_port" {
-  type        = number
-  default     = 8983
-  description = "golr server port"
-}
-
 variable "open_ports" {
   type = list 
-  default = [var.ssh_port, var.noctua_port, var.barista_port, var.golr_port]
+  default = [22, 8090, 8080, 8983]
 }
 
 provider "aws" {

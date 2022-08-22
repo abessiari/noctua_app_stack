@@ -1,4 +1,4 @@
-# Noctua Application Deployment
+# Noctua Production Deployment
 
 This repository enables the deployment of the noctua stack to AWS. It includes 
 minerva, barista, and noctua and it points to an external amigo instance.     
@@ -59,7 +59,10 @@ go-deploy -c config-stack.yaml -w production-yy-mm-dd -d aws -verbose
 ```
 
 ## Access noctua from a browser
-- Use `http://{public_ip}:8080` 
+The elastic public ip address shows up in the logs when deploying but it can also be found in production-yy-mm-dd.cfg
+Point the noctua and barista DNS entries mentioned above to this ip address
+
+- Use `http://{public_ip}`
 
 ## Destroy Instance And Stack
 

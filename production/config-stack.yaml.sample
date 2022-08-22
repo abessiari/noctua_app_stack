@@ -17,7 +17,10 @@ stack:
      S3_CRED_FILE: /Users/SOME_USER/S3/s3cfg
      S3_BUCKET: REPLACE_ME
 
-     # DNS hostname  alias ca be same as host
+     $ Location of blazegraph.jnl
+     BLAZEGRAPH_JOURNAL: REPLACE_ME
+
+     # DNS hostname  alias can be same as host
      noctua_host: REPLACE_ME
      noctua_host_alias: REPLACE_ME
      noctua_proxy_port: 80
