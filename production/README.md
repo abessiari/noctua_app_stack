@@ -1,7 +1,7 @@
 # Noctua Application Deployment
 
 This repository enables the deployment of the noctua stack to AWS. It includes 
-minerva, barista, and noctua and it points to an external minerva instance.     
+minerva, barista, and noctua and it points to an external amigo instance.     
 
 ## Deploy a version of the Noctua editor (including minerva, barista, noctua):
   - Important ansible files:
@@ -11,14 +11,16 @@ minerva, barista, and noctua and it points to an external minerva instance.
     - stage.yaml
     - start_services.yaml
   
-## Artifacts Deployed To Staging directory:
-  - Copy blazegraph.jnl
+## Artifacts Deployed To Staging directory On AWS:
+  - blazegraph.jnl
   - Cloned repositories:
     - noctua-form, noctua-landing-page, noctua-models, go-site and noctua-visual-pathway-editor.
-  - docker-compose and configuration files are generated from templates.
+  - s3 credentials used to push apache logs to s3 buckets
+  - github OAUTH client id and secret
+  - docker-production-compose and various configuration files from template directory
 
 ## Install Python Deploy Script
-Use Python script to deploy. Note the script has a -dry-run option.
+Use Python script to deploy. Note the script has a <b>-dry-run</b> option.
 
 ```
 >pip install go-deploy==0.3.0 # requires python >=3.8.5
