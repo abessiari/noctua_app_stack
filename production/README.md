@@ -17,34 +17,37 @@ minerva, barista, golr and noctua) locally, using self-generated GO-CAM models (
     - noctua-form, noctua-landing-page, noctua-models, go-site and noctua-visual-pathway-editor.
   - docker-compose and configuration files are generated from templates.
 
-#### AWS TERRAFORM BACKEND 
+## AWS TERRAFORM BACKEND 
 
 - backend.tf
   - Points to terraform backend. See production/backend.tf.sample
 
-### PROVISON 
+## PROVISON 
 
-# Modify as needed
+// Modify as needed
+```
 cp ./production/backend.tf.sample aws/backend.tf
+```
 
-# Deploy
+## Install Python Deploy Script
 Use Python script to deploy. Note the script has a -dry-run option.
 
 >pip install go-deploy==0.3.0 # requires python >=3.8.5
 >go-deploy -h
 
-# We append the date to the terraform workspace name. As as example we will use production-yy-mm-dd
 
-# Modify as needed
+### Modify as needed
+// We append the date to the terraform workspace name. As as an example we will use production-yy-mm-dd
+
 cp ./production/config-instance.yaml.sample config-instance.yaml
 go-deploy -init -c config-instance.yaml -w production-yy-mm-dd -d aws -verbose
 
-# ansible inventory file has the public ip 
+// ansible inventory file has the public ip 
 cat production-yy-mm-dd.cfg
 
-# Modify as needed and be sure to set host to public ip address
-# Be sure to set the docker_hub_user to the docker account where minerva and noctua images live 
-# They now live under aessiari you can build them and push to your own account 
+// Modify as needed and be sure to set host to public ip address
+// Be sure to set the docker_hub_user to the docker account where minerva and noctua images live 
+// They now live under aessiari you can build them and push to your own account 
 cp ./production/config-stack.yaml.sample config-stack.yaml
 go-deploy -c config-stack.yaml -w production-yy-mm-dd -d aws -verbose
 
