@@ -4,7 +4,7 @@ This repository enables the deployment of the noctua editor (which includes
 minerva, barista, golr and noctua) locally, using self-generated GO-CAM models (in the form of .ttl files).    
 
 ## Deploy a version of the Noctua editor (including minerva, barista, noctua):
-  - important ansible files:
+  - Important ansible files:
     - vars.yaml
     - docker-vars.yaml
     - s3-vars.yaml
