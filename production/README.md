@@ -3,18 +3,18 @@
 This repository enables the deployment of the noctua editor (which includes 
 minerva, barista, golr and noctua) locally, using self-generated GO-CAM models (in the form of .ttl files).    
 
-## Deploy a version of the Noctua editor (including minerva, barista, golr and noctuar):
+## Deploy a version of the Noctua editor (including minerva, barista, noctua):
   - important ansible files:
     - vars.yaml
     - docker-vars.yaml
+    - s3-vars.yaml
     - stage.yaml
     - start_services.yaml
   
 ## Deployment artifacts generated:
-  - blazegraph journal
-  - Solr Index
-  - Cloned repositories including:
-    - noctua-form, noctua-landing-page, noctua-models, go-site.
+  - Copy blazegraph.jnl
+  - Cloned repositories:
+    - noctua-form, noctua-landing-page, noctua-models, go-site and noctua-visual-pathway-editor.
   - docker-compose and configuration files are generated from templates.
 
 #### AWS TERRAFORM BACKEND 
