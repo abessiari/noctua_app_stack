@@ -27,12 +27,11 @@ Use Python script to deploy. Note the script has a <b>-dry-run</b> option.
 >go-deploy -h
 ```
 
-## AWS TERRAFORM BACKEND 
+## S3 TERRAFORM BACKEND 
 
-- backend.tf
-  - Use S3 terraform backend. See production/backend.tf.sample
+We use S3 terraform backend to store terraform's state. See production/backend.tf.sample
 
-## PROVISON 
+## PROVISON TO AWS
 
 Copy sample files and modify as needed. For the terraform worksapce we append the date.
 As an example we use production-yy-mm-dd
@@ -45,10 +44,10 @@ cp ./production/config-stack.yaml.sample config-stack.yaml
 go-deploy -c config-stack.yaml -w production-yy-mm-dd -d aws -verbose
 ```
 
-### Access noctua from a browser
+## Access noctua from a browser
 - Use `http://{public_ip}:8080` 
 
-### Destroy Instance And Stack
+## Destroy Instance And Stack
 
 ```sh
 # Make sure you pointing to the correct workspace
